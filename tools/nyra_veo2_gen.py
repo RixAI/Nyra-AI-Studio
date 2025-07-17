@@ -1,8 +1,12 @@
 # tools/nyra_veo2_gen.py
+# DEFINITIVE FINAL VERSION v2: Adds explicit credential scoping to fix auth issues.
+
 import argparse
 import time
 from typing import Optional
 from google import genai
+import google.auth
+import google.auth.transport.requests # <-- REQUIRED FOR THE FIX
 from google.genai.types import GenerateVideosConfig, Image
 from ._helpers import download_from_gcs, handle_video_operation, upload_to_gcs, resolve_path_in_workspace
 from .models import MODELS
@@ -20,10 +24,24 @@ def generate_veo2_video(
     number_of_videos: Optional[int] = 1,
     enhance_prompt: Optional[bool] = True
 ) -> str:
-    """Generates a video from text or image using a Veo 2 model."""
+    """Generates a video from text or image using a Veo 2 model with explicit, scoped credentials."""
     print(f"\n[Tool: generate_veo2_video] with model '{model_name}'")
     try:
-        gcp_client = genai.Client(vertexai=True, project=config.PROJECT_ID, location=config.LOCATION)
+        # --- START OF THE DEFINITIVE FIX ---
+        creds, _ = google.auth.load_credentials_from_file(
+            config.SERVICE_ACCOUNT_KEY_PATH,
+            scopes=['https://www.googleapis.com/auth/cloud-platform']
+        )
+        creds.refresh(google.auth.transport.requests.Request())
+
+        gcp_client = genai.Client(
+            vertexai=True,
+            project=config.PROJECT_ID,
+            location=config.LOCATION,
+            credentials=creds
+        )
+        # --- END OF THE DEFINITIVE FIX ---
+
         output_gcs_prefix = f"video_outputs/{model_name}/{int(time.time())}"
         output_gcs_uri = f"gs://{config.GCS_BUCKET_NAME}/{output_gcs_prefix}/"
         
@@ -45,7 +63,7 @@ def generate_veo2_video(
         return download_from_gcs(gcs_uri, output_path)
     except Exception as e:
         print(f"❌ FAILED: Veo 2 generation. Error: {e}")
-        return None
+        return str(e)
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Veo 2 Video Generation with Full Controls")

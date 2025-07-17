@@ -1,17 +1,16 @@
 # tools/nyra_veo3_gen.py
-# Definitive Version 2.0: Fixes hardcoded project and location values.
+# Definitive Version 3.0: Adds explicit credential scoping to fix auth issues.
 import argparse
 import time
 from typing import Optional
 from google import genai
+import google.auth
+import google.auth.transport.requests # <-- REQUIRED FOR THE FIX
 from google.genai.types import GenerateVideosConfig, Image
 from ._helpers import download_from_gcs, handle_video_operation, upload_to_gcs, resolve_path_in_workspace
 from .models import MODELS
 import config
 from . import _schema_helper
-
-# DEFINITIVE FIX: Removed hardcoded PROJECT_ID and LOCATION variables.
-# The script will now correctly use the values imported from the 'config' module.
 
 def generate_veo3_video(
     model_name: str,
@@ -26,11 +25,23 @@ def generate_veo3_video(
     enhance_prompt: Optional[bool] = True,
     person_generation: Optional[str] = "allow_adult"
 ) -> str:
-    """Generates a video from text or an image using a Veo 3 model with full parameter control."""
+    """Generates a video from text or an image using a Veo 3 model with explicit, scoped credentials."""
     print(f"\n[Tool: generate_veo3_video] with model '{model_name}'")
     try:
-        # DEFINITIVE FIX: Now uses config.PROJECT_ID and config.LOCATION.
-        gcp_client = genai.Client(vertexai=True, project=config.PROJECT_ID, location=config.LOCATION)
+        # --- START OF THE DEFINITIVE FIX ---
+        creds, _ = google.auth.load_credentials_from_file(
+            config.SERVICE_ACCOUNT_KEY_PATH,
+            scopes=['https://www.googleapis.com/auth/cloud-platform']
+        )
+        creds.refresh(google.auth.transport.requests.Request())
+
+        gcp_client = genai.Client(
+            vertexai=True,
+            project=config.PROJECT_ID,
+            location=config.LOCATION,
+            credentials=creds
+        )
+        # --- END OF THE DEFINITIVE FIX ---
         
         if duration_seconds != 8:
             print(f"-> WARNING: Model {model_name} requires an 8-second duration. Overriding value.")
@@ -59,7 +70,6 @@ def generate_veo3_video(
     except Exception as e: 
         return f"❌ FAILED: Veo 3 generation. Error: {e}"
 
-# --- TOOL REGISTRATION ---
 _TOOL_FUNCTIONS = [generate_veo3_video]
 def get_tool_declarations():
     return [_schema_helper.create_function_declaration(f) for f in _TOOL_FUNCTIONS]

@@ -1,18 +1,17 @@
 # tools/nyra_imagen_gen.py
-# Definitive Version 7.0: Reverted to the simple, stable genai.Client method
-# as documented in the project guides. All incorrect ControlNet logic has been removed.
+# DEFINITIVE FINAL VERSION v2.1: Reverted to stable version without the faulty ControlNet logic.
 
-# --- Path Setup ---
 import os
 import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-# ---
 
 import argparse
 from typing import Optional
 from enum import Enum
 from google import genai
 import google.genai.types as genai_types
+import google.auth
+import google.auth.transport.requests
 from tools._helpers import resolve_path_in_workspace
 from tools.models import MODELS
 from tools import _schema_helper
@@ -23,27 +22,29 @@ class AspectRatio(str, Enum):
 
 def generate_image(model_name: str, prompt: str, output_path: str, aspect_ratio: AspectRatio, add_watermark: bool = False, negative_prompt: Optional[str] = None, seed: Optional[int] = None):
     """
-    Generates an image from a text prompt using the stable genai.Client.
+    Generates an image from a text prompt using explicit, scoped credentials.
     """
     print(f"\n[Tool: generate_image] with model '{model_name}'")
     try:
-        # DEFINITIVE FIX: Use the simple and correct genai.Client as per the documentation.
-        gcp_client = genai.Client(vertexai=True, project=config.PROJECT_ID, location=config.LOCATION)
+        creds, _ = google.auth.load_credentials_from_file(
+            config.SERVICE_ACCOUNT_KEY_PATH,
+            scopes=['https://www.googleapis.com/auth/cloud-platform']
+        )
+        creds.refresh(google.auth.transport.requests.Request())
+
+        gcp_client = genai.Client(
+            vertexai=True,
+            project=config.PROJECT_ID,
+            location=config.LOCATION,
+            credentials=creds
+        )
         
         if isinstance(aspect_ratio, Enum):
             ratio_value = aspect_ratio.value
         else:
             ratio_value = str(aspect_ratio)
 
-        config_params = {
-            "number_of_images": 1,
-            "aspect_ratio": ratio_value,
-            "add_watermark": add_watermark,
-            "seed": seed,
-            "negative_prompt": negative_prompt
-        }
-        
-        # Use a dictionary to filter out None values to keep the call clean
+        config_params = { "number_of_images": 1, "aspect_ratio": ratio_value, "add_watermark": add_watermark, "seed": seed, "negative_prompt": negative_prompt }
         final_config = {k: v for k, v in config_params.items() if v is not None}
 
         response = gcp_client.models.generate_images(
@@ -51,24 +52,18 @@ def generate_image(model_name: str, prompt: str, output_path: str, aspect_ratio:
             prompt=prompt,
             config=genai_types.GenerateImagesConfig(**final_config)
         )
-        
         img = response.generated_images[0]
         local_path = resolve_path_in_workspace(output_path)
         img.image.save(str(local_path))
-        
         print(f"✅ SUCCESS: Image saved directly to {local_path}")
         return str(local_path)
     except Exception as e:
         print(f"❌ FAILED: generate_image. Error: {e}")
-        return None
+        return str(e)
 
-# --- TOOL REGISTRATION AND CLI ---
-# (The 'controlnet_skeleton_path' argument is removed from the tool signature and CLI)
 _TOOL_FUNCTIONS = [generate_image]
-def get_tool_declarations():
-    return [_schema_helper.create_function_declaration(f) for f in _TOOL_FUNCTIONS]
-def get_tool_registry():
-    return {f.__name__: f for f in _TOOL_FUNCTIONS}
+def get_tool_declarations(): return [_schema_helper.create_function_declaration(f) for f in _TOOL_FUNCTIONS]
+def get_tool_registry(): return {f.__name__: f for f in _TOOL_FUNCTIONS}
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Imagen Text-to-Image Generation")

@@ -116,13 +116,22 @@ def delete_file(path: str) -> str:
     return message
 
 def make_directory(path: str) -> str:
-    """Creates a new directory and returns a confirmation."""
+    """Creates a new directory (and any parents) if it doesn't exist."""
     print(f"\n[Tool: make_directory] at '{path}'")
-    target_path = resolve_path_in_workspace(path)
-    # The directory is already created by resolve_path_in_workspace helper
-    message = f"Created directory at {target_path}"
-    print(f"✅ SUCCESS: {message}")
-    return message
+    try:
+        # Use the helper to get a safe, resolved path object
+        target_path = resolve_path_in_workspace(path)
+        
+        # Explicitly create the target directory itself.
+        target_path.mkdir(parents=True, exist_ok=True)
+        
+        message = f"Directory ensured at {target_path}"
+        print(f"✅ SUCCESS: {message}")
+        return message
+    except Exception as e:
+        error_message = f"Failed to create directory. Error: {e}"
+        print(f"❌ FAILED: {error_message}")
+        return error_message
 
 def frames_to_video(input_dir: str, output_path: str, fps: int = 24) -> str:
     """Compiles a sequence of image frames into a video file and returns a confirmation."""
@@ -146,12 +155,99 @@ def frames_to_video(input_dir: str, output_path: str, fps: int = 24) -> str:
     print(f"✅ SUCCESS: {message}")
     return message
 
+ 
+def mix_audio_tracks(narration_path: str, music_path: str, output_path: str, music_volume: float = 0.25) -> str:
+    """
+    Mixes a primary narration track with a background music track.
+    The music volume is lowered to ensure the narration is clear.
+    """
+    print(f"\n[Tool: mix_audio_tracks] -> Mixing narration and music")
+    try:
+        narration_input = ffmpeg.input(resolve_path_in_workspace(narration_path))
+        music_input = ffmpeg.input(resolve_path_in_workspace(music_path))
+        resolved_output = resolve_path_in_workspace(output_path)
+
+        # DEFINITIVE FIX: Corrected the invalid variable name 'music_ quieter' to 'music_quieter'.
+        music_quieter = music_input.filter('volume', volume=music_volume)
+
+        # Mix the narration at full volume with the quieter music track
+        # 'shortest' ensures the output duration matches the narration.
+        mixed_audio = ffmpeg.filter([narration_input, music_quieter], 'amix', duration='first')
+
+        # Execute the ffmpeg command
+        output_stream = ffmpeg.output(mixed_audio, str(resolved_output), acodec='mp3')
+        output_stream.run(capture_stdout=True, capture_stderr=True, overwrite_output=True)
+
+        message = f"Successfully mixed audio and saved to {resolved_output}"
+        print(f"✅ SUCCESS: {message}")
+        return message
+    except ffmpeg.Error as e:
+        error_message = f"FFMPEG mixing failed.\nFFMPEG STDERR: {e.stderr.decode('utf8')}"
+        print(f"❌ FAILED: {error_message}")
+        return error_message
+    except Exception as e:
+        error_message = f"An unexpected error occurred during audio mixing. Error: {e}"
+        print(f"❌ FAILED: {error_message}")
+        return error_message
+
+
+
+# Add this helper function to the file
+def get_audio_duration(file_path: str) -> float:
+    """Gets the duration of an audio or video file in seconds using ffprobe."""
+    print(f"\n[HELPER: get_audio_duration] for '{file_path}'")
+    try:
+        resolved_path = resolve_path_in_workspace(file_path)
+        probe = ffmpeg.probe(str(resolved_path))
+        duration = float(probe['format']['duration'])
+        print(f" -> Duration: {duration:.2f} seconds")
+        return duration
+    except Exception as e:
+        print(f"❌ FAILED: Could not get duration. Error: {e}")
+        return 0.0
+
+# Add this new tool function to the file
+def loop_audio(source_audio_path: str, target_duration_seconds: float, output_path: str) -> str:
+    """
+    Loops a source audio file to create a new file of a specific target duration.
+    """
+    print(f"\n[Tool: loop_audio] to target duration {target_duration_seconds:.2f}s")
+    try:
+        resolved_source = resolve_path_in_workspace(source_audio_path)
+        resolved_output = resolve_path_in_workspace(output_path)
+
+        # Use ffmpeg's stream_loop for efficient, gapless looping
+        # -1 means infinite loop, which we then cut short with the -t (t) parameter.
+        input_stream = ffmpeg.input(str(resolved_source), stream_loop=-1)
+        
+        # Create the output stream, trimming it to the exact target duration.
+        # acodec='copy' is used to avoid re-encoding if the format is the same, making it faster.
+        output_stream = ffmpeg.output(input_stream, str(resolved_output), t=target_duration_seconds, acodec='copy', shortest=None)
+
+        # Execute the command
+        output_stream.run(capture_stdout=True, capture_stderr=True, overwrite_output=True)
+
+        message = f"Successfully looped '{source_audio_path}' to {target_duration_seconds:.2f}s. Saved to {resolved_output}"
+        print(f"✅ SUCCESS: {message}")
+        return str(resolved_output)
+    except ffmpeg.Error as e:
+        error_message = f"FFMPEG looping failed.\nFFMPEG STDERR: {e.stderr.decode('utf8')}"
+        print(f"❌ FAILED: {error_message}")
+        return error_message
+    except Exception as e:
+        error_message = f"An unexpected error occurred during audio looping. Error: {e}"
+        print(f"❌ FAILED: {error_message}")
+        return error_message
+
+# Remember to add `get_audio_duration` and `loop_audio` to the _TOOL_FUNCTIONS list in the file.
+
+
+
 # --- TOOL REGISTRATION ---
 _TOOL_FUNCTIONS = [
     list_files, save_text_file, read_text_file, move_file, copy_file,
-    delete_file, make_directory, frames_to_video, compile_final_video
+    delete_file, make_directory, frames_to_video, compile_final_video,
+    mix_audio_tracks, get_audio_duration, loop_audio
 ]
-def get_tool_declarations():
-    return [_schema_helper.create_function_declaration(f) for f in _TOOL_FUNCTIONS]
-def get_tool_registry():
-    return {f.__name__: f for f in _TOOL_FUNCTIONS}
+def get_tool_declarations(): return [_schema_helper.create_function_declaration(f) for f in _TOOL_FUNCTIONS]
+def get_tool_registry(): return {f.__name__: f for f in _TOOL_FUNCTIONS}

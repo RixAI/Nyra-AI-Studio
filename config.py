@@ -1,18 +1,19 @@
-#
-# config.py
-# Nyra AI Studio - Central Configuration (Updated for nick-466006)
-#
+# config.py (Updated for the brand new 'nicki-one' project)
 import os
 
 # --- Google Cloud Project Configuration ---
-PROJECT_ID = "nick-466006"
+# 1. Using your new Project ID
+PROJECT_ID = "nicki-one"
+
 LOCATION = "us-central1"
 
 # --- Google Cloud Storage Configuration ---
-GCS_BUCKET_NAME = "nick-storage"
+# 2. Using your new bucket name
+GCS_BUCKET_NAME = "nicki-one-storage"
 
 # --- Local Workspace Configuration ---
 WORKSPACE_DIR = r"C:\Storage\Workspace\Nyra-AI-Studio"
 
 # --- Authentication Configuration ---
-SERVICE_ACCOUNT_KEY_PATH = os.path.join(WORKSPACE_DIR, r"auth\nick-466006-6fb113bb2d1f.json")
+# 3. Using the new JSON key file you provided
+SERVICE_ACCOUNT_KEY_PATH = os.path.join(WORKSPACE_DIR, r"auth\nicki-one-5a90ea8f1d61.json")
