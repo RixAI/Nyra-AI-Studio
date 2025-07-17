@@ -1,0 +1,142 @@
+[
+    {
+        "narration_line": "ब्रह्मांड के इस अनंत विस्तार में, जहाँ खरबों तारे और ग्रह मौन नृत्य करते हैं, सनातन दृष्टि केवल भौतिक पिंडों को नहीं देखती।",
+        "start_time": 0.0,
+        "end_time": 6.8,
+        "image_prompt": "An awe-inspiring, ultra-wide shot of the cosmos. Billions of stars glitter against vibrant, colorful nebulae. Galaxies swirl in the vast darkness. The image is hyper-realistic yet has a mystical quality.",
+        "motion_prompt": "A slow, majestic zoom-out, starting from a dense star cluster to reveal the immense scale of a galaxy."
+    },
+    {
+        "narration_line": "यह एक जीवंत चैतन्यपूर्ण ब्रह्मांड को देखती है, जहाँ प्रत्येक खगोलीय इकाई एक लौकिक प्रज्ञा, एक देवता का स्वरूप है।",
+        "start_time": 7.3,
+        "end_time": 14.5,
+        "image_prompt": "The planets of the solar system are visible. Each planet has a subtle, divine aura, a soft glow that suggests a living consciousness within. Faint, sacred geometric patterns are overlaid on the cosmic background.",
+        "motion_prompt": "A slow pan across the planets, with a gentle shimmer effect on each celestial body as the camera passes over it."
+    },
+    {
+        "narration_line": "ये ग्रह जिन्हें हम ग्रह कहते हैं, मात्र पत्थर और गैस के गोले नहीं, बल्कि वे शक्तिशाली देव हैं जो पृथ्वी पर जीवन की लय को प्रभावित करते हैं।",
+        "start_time": 15.0,
+        "end_time": 23.0,
+        "image_prompt": "A beautiful view of Earth from space. Ethereal, shimmering lines of colored energy (red for Mars, gold for Jupiter, silver for Venus) connect the planets to Earth, touching the atmosphere and influencing its patterns.",
+        "motion_prompt": "A slow orbital shot around Earth, showing the streams of cosmic energy flowing towards it from other planets."
+    },
+    {
+        "narration_line": "आइए हम अपनी इस यात्रा में मंगल, बृहस्पति और शुक्र को इसी दिव्य दृष्टि से देखें।",
+        "start_time": 23.8,
+        "end_time": 28.5,
+        "image_prompt": "A quick montage: a close-up of Mars' crimson surface, Jupiter's swirling Great Red Spot, and Venus's thick, pearlescent cloud cover. Each planet glows with its unique divine light.",
+        "motion_prompt": "A series of quick, impactful cuts between the three planets, each shot having a slight forward dolly motion."
+    },
+    {
+        "narration_line": "सबसे पहले हम रक्तवर्ण के मंगल ग्रह की ओर बढ़ते हैं। वैदिक ज्योतिष में वे भूमि के पुत्र, भौम कहलाते हैं।",
+        "start_time": 29.5,
+        "end_time": 35.8,
+        "image_prompt": "The camera flies towards a hyper-detailed Mars. Superimposed over the red planet is the divine figure of Mangala, a powerful warrior deity in brilliant red armor, holding a spear, looking fierce and noble.",
+        "motion_prompt": "A fast dolly zoom towards Mars, culminating in a slow orbit that reveals the deity's form."
+    },
+    {
+        "narration_line": "मंगल ऊर्जा, साहस, पराक्रम और संकल्प के देवता हैं।",
+        "start_time": 36.5,
+        "end_time": 39.8,
+        "image_prompt": "Close-up on the deity Mangala. His eyes burn with fiery determination. The background is an energetic, fiery nebula, symbolizing raw power and courage.",
+        "motion_prompt": "A dramatic push-in on Mangala's determined face."
+    },
+    {
+        "narration_line": "वे देवताओं के सेनापति हैं जो हमें चुनौतियों का सामना करने की शक्ति और महत्वाकांक्षा को पूर्ण करने का आवेग प्रदान करते हैं।",
+        "start_time": 40.5,
+        "end_time": 47.5,
+        "image_prompt": "A heroic, wide shot of Mangala leading a celestial army (Devas) through space. He raises his weapon, and a wave of courage and energy flows from him to his warriors.",
+        "motion_prompt": "A low-angle arc shot that moves up, emphasizing his leadership and heroic stature."
+    },
+    {
+        "narration_line": "उनकी लालिमा केवल लौह ऑक्साइड की धूल नहीं, बल्कि शौर्य और क्रियाशीलता की जीवंत अभिव्यक्ति है।",
+        "start_time": 48.0,
+        "end_time": 54.0,
+        "image_prompt": "Extreme close-up of the red dust of Mars. The particles swirl and coalesce, magically forming abstract, energetic shapes that represent valor and dynamic action, like a charging bull or a lightning strike.",
+        "motion_prompt": "A slow zoom into the swirling red dust, which then morphs into the symbolic shapes of valor."
+    },
+    {
+        "narration_line": "अब हमारी यात्रा सौर मंडल के सबसे विशाल ग्रह, बृहस्पति की ओर अग्रसर है।",
+        "start_time": 55.0,
+        "end_time": 59.5,
+        "image_prompt": "A transitional shot leaving Mars, flying through a stylized, shimmering asteroid belt, and approaching the colossal planet Jupiter, which looms large in the frame.",
+        "motion_prompt": "A smooth, sweeping crane shot that travels from Mars and gracefully arrives in orbit around Jupiter."
+    },
+    {
+        "narration_line": "यह बृहस्पति है, देवों के गुरु, ज्ञान और विवेक के सागर।",
+        "start_time": 1.0,
+        "end_time": 103.8,
+        "image_prompt": "Jupiter fills the screen. Overlaid on its swirling bands is the image of Brihaspati, a wise, benevolent sage with a long beard, holding ancient scrolls. He radiates a warm, golden light of wisdom.",
+        "motion_prompt": "A very slow, majestic dolly-in towards Jupiter, emphasizing its grand scale and the serene presence of the deity."
+    },
+    {
+        "narration_line": "उनका विशाल आकार उनकी असीम कृपा और ज्ञान के विस्तार का प्रतीक है।",
+        "start_time": 104.5,
+        "end_time": 108.0,
+        "image_prompt": "Close-up on Brihaspati's calm, knowing eyes. The Great Red Spot of Jupiter aligns with his third eye, pulsing gently with cosmic intelligence. The vastness of the planet behind him signifies infinite knowledge.",
+        "motion_prompt": "A slow zoom towards Brihaspati's third eye, which corresponds with Jupiter's Great Red Spot."
+    },
+    {
+        "narration_line": "वे धर्म, आध्यात्मिकता और उच्च शिक्षा के अधिष्ठाता हैं। बृहस्पति की उपस्थिति ब्रह्माणीय विधान और नैतिक व्यवस्था का आश्वासन है। वे वो दिव्य शिक्षक हैं जो अंधकार से प्रकाश की ओर ले जाते हैं।",
+        "start_time": 108.5,
+        "end_time": 120.5,
+        "image_prompt": "A symbolic scene where the figure of Brihaspati guides a group of people from a dark, chaotic realm into a bright, orderly space filled with sacred geometry and glowing constellations, representing enlightenment and cosmic law.",
+        "motion_prompt": "A slow, sweeping pan that follows the procession from the darkness into the light."
+    },
+    {
+        "narration_line": "रात्रि के आकाश में सबसे चमकीले तारे सा दिखने वाला यह शुक्र ग्रह है।",
+        "start_time": 121.0,
+        "end_time": 125.0,
+        "image_prompt": "A serene view of a twilight sky from Earth. Venus is visible as an incredibly bright, beautiful star. The scene is peaceful and aesthetically pleasing.",
+        "motion_prompt": "A static shot with a slow focus pull to sharpen the image of Venus in the sky."
+    },
+    {
+        "narration_line": "सनातन परंपरा में वे दैत्यों के गुरु, शुक्राचार्य हैं। वे सौंदर्य, प्रेम, कला और भौतिक सुखों के स्वामी हैं।",
+        "start_time": 125.8,
+        "end_time": 133.0,
+        "image_prompt": "Transition to a close-up of Venus with its swirling clouds. The deity Shukracharya is superimposed—handsome, artistic, and charismatic. He is surrounded by symbols of art, beauty, and luxury: blooming lotuses, jewels, and musical instruments.",
+        "motion_prompt": "A graceful, slow-motion orbital shot around Venus, tilting up to reveal Shukracharya's elegant form."
+    },
+    {
+        "narration_line": "यदि बृहस्पति पारलौकिक ज्ञान के प्रतीक हैं, तो शुक्र सांसारिक कलाओं और ऐश्वर्य के।",
+        "start_time": 133.5,
+        "end_time": 138.5,
+        "image_prompt": "A split-screen effect. On the left, Brihaspati surrounded by stars and spiritual symbols. On the right, Shukracharya surrounded by vibrant paintings, sculptures, and lush nature.",
+        "motion_prompt": "A slow push-in on the split screen, showing the contrast and balance between the two deities."
+    },
+    {
+        "narration_line": "वे संजीवनी विद्या के ज्ञाता हैं जो जीवन के नवीनीकरण और रचनात्मकता की शक्ति का प्रतिनिधित्व करते हैं।",
+        "start_time": 139.0,
+        "end_time": 145.0,
+        "image_prompt": "Close up on Shukracharya's hands. A glowing green energy, the 'Sanjivani Vidya', flows from them, touching a withered plant which instantly revives and bursts into full, vibrant bloom.",
+        "motion_prompt": "A focus pull from Shukracharya's face to his hands, then a slow tilt down to follow the energy to the reviving plant."
+    },
+    {
+        "narration_line": "उनकी चमक परिष्कृत आनंद और भौतिक जगत की सुंदरता का आह्वान है।",
+        "start_time": 145.8,
+        "end_time": 149.5,
+        "image_prompt": "A beautiful montage of refined earthly pleasures: a graceful ballet dancer, a masterful artist's brush on a canvas, a luxurious feast. All scenes are bathed in a soft, ethereal glow.",
+        "motion_prompt": "A series of elegant, slow-motion shots that dissolve smoothly into one another."
+    },
+    {
+        "narration_line": "मंगल का बल, बृहस्पति का ज्ञान और शुक्र का सौंदर्य, यह केवल ग्रहों की भौतिक विशेषताएं नहीं, बल्कि ब्रह्माणीय चेतना की विभिन्न अभिव्यक्तियां हैं।",
+        "start_time": 150.0,
+        "end_time": 158.0,
+        "image_prompt": "A triptych view: three panels showing Mars with Mangala, Jupiter with Brihaspati, and Venus with Shukracharya. The panels then dissolve and merge into a single image of the cosmos, with their respective energies intertwined.",
+        "motion_prompt": "The three panels slide into frame, hold, and then merge into one another with a beautiful light effect."
+    },
+    {
+        "narration_line": "सनातन धर्म हमें सिखाता है कि जो ब्रह्मांड में है, वही पिंड में है।",
+        "start_time": 158.5,
+        "end_time": 202.5,
+        "image_prompt": "The camera pulls back from the cosmos to show a silhouette of a person in a meditative pose on a serene mountaintop, with the universe as the backdrop. The phrase 'Yat Pinde Tat Brahmande' appears in elegant Devanagari script.",
+        "motion_prompt": "A slow pull-back from the grand cosmos to frame the meditating human figure, connecting the macrocosm and microcosm."
+    },
+    {
+        "narration_line": "यह दिव्य ग्रह आज भी अपनी सूक्ष्म किरणों से पृथ्वी पर जीवन के महाकाव्य को निर्देशित कर रहे हैं, हमें याद दिलाते हुए कि हम इस ब्रह्मांडीय नृत्य का एक अभिन्न अंग हैं।",
+        "start_time": 203.0,
+        "end_time": 212.5,
+        "image_prompt": "Final shot. Faint, colorful streams of energy from Mars, Jupiter, and Venus flow down from the cosmos and merge with the meditating person's energy field (chakras). The person glows softly, becoming one with the cosmic dance.",
+        "motion_prompt": "A final, slow dolly-in towards the meditating figure, as the cosmic energies visibly connect with them, ending on a hopeful and unifying note."
+    }
+]

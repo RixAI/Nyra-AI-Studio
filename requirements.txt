@@ -1,0 +1,17 @@
+# requirements.txt
+
+google-genai
+google-cloud-storage
+google-cloud-aiplatform
+google-cloud-texttospeech
+google-cloud-speech
+Pillow
+opencv-python
+requests
+ffmpeg-python
+controlnet_aux
+torch
+torchvision
+torchaudio
+mediapipe
+moviepy # DEFINITIVE FIX: Added the new, required video editing library.

@@ -1,0 +1,23 @@
+[
+  {
+    "shot_id": 1,
+    "view_angle": "back",
+    "pose_prompt": "A photo of an astronaut standing at the entrance of a large cave, looking in.",
+    "scene_prompt": "The exterior of a cave on Mars. The landscape is rocky and red under a dusty orange sky. The cave entrance is a dark, imposing shadow in the side of a Martian rock formation.",
+    "action_prompt": "Orion, in his spacesuit, stands at the mouth of a dark cave, ready to explore."
+  },
+  {
+    "shot_id": 2,
+    "view_angle": "side",
+    "pose_prompt": "A photo of a person walking carefully, holding a light source to illuminate the path ahead in a dark space.",
+    "scene_prompt": "The interior of a dark cave. The only light source is a beam from a flashlight, revealing jagged, rust-colored rock walls and a dusty floor.",
+    "action_prompt": "Orion ventures deeper into the cave, his suit's light cutting through the oppressive darkness."
+  },
+  {
+    "shot_id": 3,
+    "view_angle": "front",
+    "pose_prompt": "A photo of a person kneeling and looking down at something on the ground with a sense of wonder and surprise.",
+    "scene_prompt": "A cavern deep within a Martian cave. The walls are covered in large, glowing blue crystals that illuminate the entire space with an ethereal light.",
+    "action_prompt": "Orion kneels, mesmerized, as his light reveals a cavern filled with giant, glowing crystals."
+  }
+]
